@@ -1,7 +1,9 @@
-CC = gcc
+PREFIX=/usr/${EXTRA_PREFIX}
 INCLUDE_DIR=/usr/include/collectd/ ${EXTRA_INCLUDE}
 COPTS = -O2 -Wall -fPIC -DPIC -DFP_LAYOUT_NEED_NOTHING -pthread -I . -I${INCLUDE_DIR} -DVERSION=${VERSION}
+PLUGINDIR=${PREFIX}/lib/collectd
 
+CC = gcc
 VERSION != uname -r | sed -e 's/\.//g'
 
 GENERATION = new
@@ -31,3 +33,7 @@ pfrulescmd: pfutils.h pfrules.c pfutils-${GENERATION}.c
 
 pfutils.h: pfutils-${GENERATION}.h
 	cp pfutils-${GENERATION}.h pfutils.h
+
+install:
+	mkdir -p ${DESTDIR}/${PLUGINDIR}/
+	cp pf.so ${DESTDIR}/${PLUGINDIR}/
