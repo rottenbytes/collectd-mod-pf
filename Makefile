@@ -1,16 +1,12 @@
-CC =		gcc
-COPTS =		-O2 -Wall -fPIC -DPIC -DFP_LAYOUT_NEED_NOTHING -pthread -I . -I${COLLECTD_SRC} -DVERSION=${VERSION}
-COLLECTD_SRC ?=	/usr/ports/pobj/collectd-4.10.2/collectd-4.10.2/src/
+CC = gcc
+NCLUDEDIR=/usr/include/collectd/ ${EXTRA_INCLUDE}
+COPTS = -O2 -Wall -fPIC -DPIC -DFP_LAYOUT_NEED_NOTHING -pthread -I . -I${INCLUDE_DIR} -DVERSION=${VERSION}
 
-VERSION !=	uname -r | sed -e 's/\.//g'
+VERSION != uname -r | sed -e 's/\.//g'
 
-.if ${VERSION} < 46
-GENERATION =	old
-.else
-GENERATION =	new
-.endif
+GENERATION = new
 
-all: pf.so pfrules.so
+all: pf.so
 
 test: pfcmd pfrulescmd
 
