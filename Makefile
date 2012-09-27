@@ -1,5 +1,5 @@
 CC = gcc
-NCLUDEDIR=/usr/include/collectd/ ${EXTRA_INCLUDE}
+INCLUDE_DIR=/usr/include/collectd/ ${EXTRA_INCLUDE}
 COPTS = -O2 -Wall -fPIC -DPIC -DFP_LAYOUT_NEED_NOTHING -pthread -I . -I${INCLUDE_DIR} -DVERSION=${VERSION}
 
 VERSION != uname -r | sed -e 's/\.//g'
